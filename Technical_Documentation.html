@@ -2,9 +2,268 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Technical_Documentation.css">
+    <title>Guide to Python</title>
 </head>
 <body>
 
+<nav id="navbar">
+    <h2 class="heading ">Table Of Contents</h2>
+    <div class="nav nav-top">
+<a class="nav-link " href="#Documentation" >Documentation</a>
+    </div>
+    <div class="nav ">
+        <a class="nav-link" href="#Project_Documentation">Project Documentation</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Project_Publication">Project Publication</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Sphinx">Sphinx</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#reStructuredText">reStructuredText</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Code_Documentation_Advice">Code_Documentation_Advice</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Commenting_Section_of_Code">Commenting Section of Code</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Docstrings_and_Magic">Docstrings and Magic</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Docstrings_versus_Block_comments">Docstrings versus Block comments</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Writing_Docstrings">Writing Docstrings</a>
+    </div>
+    <div class="nav">
+        <a class="nav-link" href="#Other_Tools">Other Tools</a>
+    </div>
+
+</nav>
+<main id="main-doc">
+    <section class="main-section" id="Documentation">
+        <h1 class="heading">Documentation</h1>
+
+        <img src="https://d33wubrfki0l68.cloudfront.net/096e294f6e46f2c45e72e914381001bdd24c93fb/6b2d2/_images/35620636012_f66aa88f93_k_d.jpg" alt="A wall with well aligned blocks">
+        <p>
+            Readability is a primary focus for Python developers, in both project and code documentation. Following some simple best practices can save both you and others a lot of time.
+        </p>
+    </section>
+
+    <section class="main-section" id="Project_Documentation">
+        <h1>Project Documentation</h1>
+
+        <p>
+            A <code>README</code> file at the root directory should give general information to both users and maintainers of a project. It should be raw text or written in some very easy to read markup, such as <a href="https://docs.python-guide.org/writing/documentation/#restructuredtext-ref" class="link">reStructuredText</a> or Markdown. It should contain a few lines explaining the purpose of the project or library (without assuming the user knows anything about the project), the URL of the main source for the software, and some basic credit information. This file is the main entry point for readers of the code.
+        </p>
+        <p>
+            An <code>INSTALL</code> file is less necessary with Python. The installation instructions are often reduced to one command, such as <code>pip install module</code> or <code>python setup.py install</code>, and added to the <code>README</code> file.
+        </p>
+        <p>
+            A <code>LICENSE</code> file should <span class="italics">always</span> be present and specify the license under which the software is made available to the public.
+        </p>
+        <p>
+            A <code>TODO</code> file or a <code>TODO</code> section in <code>README</code> should list the planned development for the code.
+        </p>
+        <p>
+            A <code>CHANGELOG</code> file or section in <code>README</code> should compile a short overview of the changes in the code base for the latest versions.
+        </p>
+    </section>
+
+    <section class="main-section" id="Project_Publication">
+        <h1>Project Publication</h1>
+
+        <p>
+            Depending on the project, your documentation might include some or all of the following components:
+        </p>
+
+        <ul>
+            <li>
+                An <span class="italics">introduction</span> should give a very short overview of what can be done with the product, using one or two extremely simplified use cases. This is the thirty-second pitch for your project.
+            </li>
+            <li>
+                A <span class="italics">tutorial</span> should show some primary use cases in more detail. The reader will follow a step-by-step procedure to set-up a working prototype.
+            </li>
+            <li>
+                An <span class="italics">API reference</span> is typically generated from the code (see <a href="https://docs.python-guide.org/writing/documentation/#docstring-ref" class="link">docstrings</a>). It will list all publicly available interfaces, parameters, and return values.
+            </li>
+            <li>
+                <span class="italics">Developer documentation</span> is intended for potential contributors. This can include code convention and general design strategy of the project.
+            </li>
+            <li>
+                <span class="italics">User Guides and Manuals</span> provide comprehensive instructions on using the product. These documents often include detailed explanations of features, configurations, and advanced use cases. They are designed to help users get the most out of the product and solve common issues they might encounter. User guides are typically more detailed than tutorials and cover a broader range of functionalities.
+            </li>
+
+
+        </ul>
+    </section>
+
+    <section class="main-section" id="Sphinx">
+        <h2>Sphinx</h2>
+        <a href="https://www.sphinx-doc.org/" class="link">Sphinx</a> is far and away the most popular Python documentation tool. <span class="bold">Use it.</span> It converts <a href="https://docs.python-guide.org/writing/documentation/#restructuredtext-ref" class="link">reStructuredText</a> markup language into a range of output formats including HTML, LaTeX (for printable PDF versions), manual pages, and plain text.
+        <p>
+
+        </p>
+        <p>
+            There is also <span class="bold">great, free</span> hosting for your <a href="https://www.sphinx-doc.org/" class="link">Sphinx</a> docs: <a href="http://readthedocs.org/" class="link">Read The Docs</a>. Use it. You can configure it with commit hooks to your source repository so that rebuilding your documentation will happen automatically.
+        </p>
+        <p>
+            When run, <a href="https://www.sphinx-doc.org/" class="link">Sphinx</a> will import your code and using Python’s introspection features it will extract all function, method, and class signatures. It will also extract the accompanying docstrings, and compile it all into well structured and easily readable documentation for your project.
+        </p>
+
+        <div class="note-box">
+            <p class="note">
+                Note:
+            </p>
+            <p>
+                Sphinx is famous for its API generation, but it also works well for general project documentation. This Guide is built with <a href="https://www.sphinx-doc.org/" class="link">Sphinx</a> and is hosted on <a href="http://readthedocs.org/" class="link">Read The Docs</a>
+            </p>
+        </div>
+    </section>
+
+    <section class="main-section" id="reStructuredText">
+        <h2>reStructuredText</h2>
+        <p>
+            Most Python documentation is written with <a href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html" class="link">reStructuredText</a>. It’s like Markdown, but with all the optional extensions built in.
+        </p>
+        <p>
+            The <a href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html" class="link">reStructuredText Primer</a> and the <a href="http://docutils.sourceforge.net/docs/user/rst/quickref.html" class="link">reStructuredText Quick Reference</a> should help you familiarize yourself with its syntax.
+        </p>
+    </section>
+
+    <section class="main-section" id="Code_Documentation_Advice">
+        <h1>Code Documentation Advice</h1>
+
+        <p>
+            Comments clarify the code and they are added with purpose of making the code easier to understand. In Python, comments begin with a hash (number sign) (#).
+        </p>
+        <p>
+            In Python, docstrings describe modules, classes, and functions:
+        </p>
+        <div class="note">
+            <code><span class="function">def</span> square_and_rooter(x):</code>
+            <p class="indent comment">"""Return the square root of self times self."""</p>
+            <p class="indent comment"> ...</p>
+        </div>
+        <p>
+            In general, follow the comment section of <a href="https://www.python.org/dev/peps/pep-0008#comments" class="link function" >PEP 8#comments</a> (the “Python Style Guide”). More information about docstrings can be found at <a href="https://www.python.org/dev/peps/pep-0257#specification" class="link function" >PEP 0257#specification</a> (The Docstring Conventions Guide).
+        </p>
+    </section>
+
+    <section class="main-section" id="Commenting_Section_of_Code">
+        <h2>Commenting Section of Code</h2>
+        <p>
+            <span class="italics">Do not use triple-quote strings to comment code</span>. This is not a good practice, because line-oriented command-line tools such as grep will not be aware that the commented code is inactive. It is better to add hashes at the proper indentation level for every commented line. Your editor probably has the ability to do this easily, and it is worth learning the comment/uncomment toggle.
+        </p>
+    </section>
+
+    <section class="main-section" id="Docstrings_and_Magic">
+        <h2>Docstrings and Magic</h2>
+        <p>
+            Some tools use docstrings to embed more-than-documentation behavior, such as unit test logic. Those can be nice, but you won’t ever go wrong with vanilla “here’s what this does.”
+        </p>
+        <p>
+            Tools like <a href="https://www.sphinx-doc.org/" class="link">Sphinx</a> will parse your docstrings as reStructuredText and render it correctly as HTML. This makes it very easy to embed snippets of example code in a project’s documentation.
+        </p>
+        <p>
+            Additionally, <a href="https://docs.python.org/3/library/doctest.html" class="link">Doctest</a> read all embedded docstrings that look like input from the Python commandline (prefixed with “>>>”) and run them, checking to see if the output of the command matches the text on the following line. This allows developers to embed real examples and usage of functions alongside their source code. As a side effect, it also ensures that their code is tested and works.
+        </p>
+        <div class="note">
+            <code><span class="function">def</span> my_function(a, b):</code>
+            <p class="comment indent">"""</p>
+            <p class="comment indent">>>> my_function(2, 3)</p>
+            <p class="comment indent">6</p>
+            <p class="comment indent">>>> my_function('a', 3)</p>
+            <p class="comment indent">'aaa'</p>
+            <p class="comment indent">"""</p>
+            <code><span class="function">return</span> a * b</code>
+    </div>
+    </section>
+    <section class="main-section" id="Docstrings_versus_Block_comments">
+        <h2>Docstrings versus Block comments</h2>
+
+        <p>
+            These aren’t interchangeable. For a function or class, the leading comment block is a programmer’s note. The docstring describes the <span class="italics">operation</span> of the function or class:
+        </p>
+        <div class="note">
+            <p class="comment"># This function slows down program execution for some reason.</p>
+            <code>def square_and_rooter(x):</code>
+            <p class="comment indent">"""Returns the square root of self times self."""</p>
+            <p class="comment indent">...</p>
+        </div>
+        <p>
+            Unlike block comments, docstrings are built into the Python language itself. This means you can use all of Python’s powerful introspection capabilities to access docstrings at runtime, compared with comments which are optimized out. Docstrings are accessible from both the <span class="italics">__doc__</span> dunder attribute for almost every Python object, as well as with the built in <span class="italics">help()</span> function.
+        </p>
+        <p>
+            While block comments are usually used to explain what a section of code is doing, or the specifics of an algorithm, docstrings are more intended towards explaining other users of your code (or you in 6 months time) <span class="italics">how</span> a particular function can be used and the general purpose of a function, class, or module.
+        </p>
+    </section>
+
+    <section class="main-section" id="Writing_Docstrings">
+        <h2>Writing Docstrings</h2>
+        <p>
+            Depending on the complexity of the function, method, or class being written, a one-line docstring may be perfectly appropriate. These are generally used for really obvious cases, such as:
+        </p>
+        <div class="note">
+            <code><span class="function">def</span> add(a, b):</code>
+            <p class="comment indent">"""Add two numbers and return the result."""</p>
+            <code class="indent"><span class="function">return</span> a + b</code>
+        </div>
+        <p>
+            The docstring should describe the function in a way that is easy to understand. For simple cases like trivial functions and classes, simply embedding the function’s signature (i.e. <span class="italics">add(a, b) -> result</span>) in the docstring is unnecessary. This is because with Python’s inspect module, it is already quite easy to find this information if needed, and it is also readily available by reading the source code.
+        </p>
+        <p>
+            In larger or more complex projects however, it is often a good idea to give more information about a function, what it does, any exceptions it may raise, what it returns, or relevant details about the parameters.
+        </p>
+        <p>
+            For more detailed documentation of code a popular style used, is the one used by the NumPy project, often called <a href="http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html" class="link">NumPy style</a> docstrings. While it can take up more lines than the previous example, it allows the developer to include a lot more information about a method, function, or class.
+        </p>
+        <div class="note">
+            <code><span class="function">def</span> random_number_generator(arg1, arg2):</code>
+            <p class="comment indent"></p>
+            <p class="comment indent"></p>
+            <p class="comment indent"></p>
+            <p class="comment indent"></p>
+            <p class="comment indent"></p>
+            <p class="comment indent"></p>
+            <p></p>
+            <p class="comment indent"></p>
+            <p></p>
+            <p class="comment indent"></p>
+            <p class="comment indent"></p>
+            <p class="comment indent"></p>
+            <p></p>
+            <p class="comment indent"></p>
+            <code><span class="function">return</span> <span class="bold">42</span></code>
+        </div>
+        <p>
+            The <a href="https://sphinxcontrib-napoleon.readthedocs.io/" class="link">sphinx.ext.napoleon</a> plugin allows Sphinx to parse this style of docstrings, making it easy to incorporate NumPy style docstrings into your project.
+        </p>
+        <p>
+            At the end of the day, it doesn’t really matter what style is used for writing docstrings; their purpose is to serve as documentation for anyone who may need to read or make changes to your code. As long as it is correct, understandable, and gets the relevant points across then it has done the job it was designed to do.
+        </p>
+        <p>
+            For further reading on docstrings, feel free to consult <a href="https://www.python.org/dev/peps/pep-0257" class="link">PEP 257</a>
+        </p>
+    </section>
+
+    <section class="main-section" id="Other_Tools">
+        <h1>Other Tools</h1>
+        <p>You might see these in the wild. Use <a href="https://docs.python-guide.org/writing/documentation/#sphinx-ref" class="link">Sphinx</a>.</p>
+        <p><a class="link" href="https://pycco-docs.github.io/pycco/">Pycco</a></p>
+        <p class="indent">Pycco is a “literate-programming-style documentation generator” and is a port of the node.js <a href="http://jashkenas.github.com/docco" class="link">Docco</a>. It makes code into a side-by-side HTML code and documentation.</p>
+        <p><a href="https://github.com/rtomayko/ronn" class="link">Ronn</a></p>
+        <p class="indent">Ronn builds Unix manuals. It converts human readable textfiles to roff for terminal display, and also to HTML for the web.</p>
+        <p><a href="http://epydoc.sourceforge.net/" class="link">Epydoc</a></p>
+        <p class="indent">Epydoc is discontinued. Use <a href="https://docs.python-guide.org/writing/documentation/#sphinx-ref" class="link">Sphinx</a> instead.</p>
+        <p><a href="http://www.mkdocs.org/" class="link">MkDocs</a></p>
+        <p class="indent">MkDocs is a fast and simple static site generator that’s geared towards building project documentation with Markdown.</p>
+    </section>
+</main>
 </body>
 </html>
